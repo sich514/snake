@@ -39,3 +39,22 @@ canvas {
 .links a:hover {
     text-decoration: underline;
 }
+
+.hidden {
+    display: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    background-color: #5d744b;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4a5e39;
+}
