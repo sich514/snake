@@ -10,10 +10,6 @@ body {
     color: #fff;
 }
 
-h1 {
-    margin-bottom: 20px;
-}
-
 canvas {
     border: 1px solid #000;
     background-color: #5d744b;
@@ -22,8 +18,9 @@ canvas {
 .title {
     color: #5d744b;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .links {
