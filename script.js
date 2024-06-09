@@ -11,6 +11,7 @@ let snake = [
 let velocity = { x: 0, y: 0 };
 let food = { x: 15, y: 15 };
 let score = 0;
+let gameOver = false;
 
 function drawTile(color, x, y) {
     ctx.fillStyle = color;
@@ -18,6 +19,10 @@ function drawTile(color, x, y) {
 }
 
 function drawGame() {
+    if (gameOver) {
+        return;
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw food
@@ -61,6 +66,11 @@ function resetGame() {
     snake = [{ x: 10, y: 10 }];
     velocity = { x: 0, y: 0 };
     score = 0;
+    gameOver = true;
+    setTimeout(() => {
+        gameOver = false;
+        drawGame();
+    }, 1000);  // Задержка в 1 секунду перед перезапуском
 }
 
 document.addEventListener('keydown', event => {
