@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game on Solana</title>
+    <title>Snake Game - Nokia 3310 Style</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="title">PLAY SNAKE - PUMP $SNAKE</h1>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <h1 class="title">Play Snake - Buy $SNAKE</h1>
+
+    <div id="userForm">
+        <input type="text" id="username" placeholder="Twitter Username" required>
+        <input type="text" id="wallet" placeholder="Wallet Address" required>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+
+    <canvas id="gameCanvas" width="400" height="400" class="hidden"></canvas>
+    <button id="playAgainButton" class="hidden" onclick="resetGame()">Play Again</button>
+    <div id="scoreDisplay" class="hidden">Your score: 0</div>
+
+    <h2 class="title">Leaderboard</h2>
+    <div id="leaderboard"></div>
+
     <div class="links">
-        <a href="https://t.me/snake_solana" target="_blank">TG</a>
-        <a href="https://x.com/snakesolgame" target="_blank">X</a>
+        <a href="https://t.me/snake" target="_blank">TG</a>
+        <a href="https://x.com/snake" target="_blank">X</a>
         <a href="https://pump.fun" target="_blank">BUY(soon)</a>
     </div>
-    <button id="playAgainButton" class="hidden">PLAY AGAIN</button>
+
     <script src="script.js"></script>
 </body>
 </html>
