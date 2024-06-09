@@ -21,10 +21,10 @@ function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw food
-    drawTile('#FFF', food.x, food.y);
+    drawTile('#000000', food.x, food.y);
 
     // Draw snake
-    snake.forEach(part => drawTile('#FFF', part.x, part.y));
+    snake.forEach(part => drawTile('#000000', part.x, part.y));
 
     // Move snake
     const newHead = {
