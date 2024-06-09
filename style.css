@@ -18,3 +18,20 @@ canvas {
     border: 1px solid #000;
     background-color: #5d744b;
 }
+
+.links {
+    margin-top: 20px;
+}
+
+.links a {
+    color: #5d744b;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    margin: 5px 0;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
