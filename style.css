@@ -19,17 +19,24 @@ canvas {
     background-color: #5d744b;
 }
 
+.title {
+    color: #5d744b;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    text-align: center;
+}
+
 .links {
     margin-top: 20px;
+    display: flex;
+    gap: 20px; /* Расстояние между ссылками */
 }
 
 .links a {
     color: #5d744b;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 25px;
+    font-size: 14px;
     text-decoration: none;
-    display: block;
-    margin: 5px 0;
 }
 
 .links a:hover {
