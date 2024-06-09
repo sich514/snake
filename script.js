@@ -1,13 +1,11 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const playAgainButton = document.getElementById('playAgainButton');
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
 
-let snake = [
-    { x: 10, y: 10 }
-];
-
+let snake = [{ x: 10, y: 10 }];
 let velocity = { x: 0, y: 0 };
 let food = { x: 15, y: 15 };
 let score = 0;
@@ -49,12 +47,14 @@ function drawGame() {
 
     // Check collision with walls
     if (newHead.x < 0 || newHead.y < 0 || newHead.x >= tileCount || newHead.y >= tileCount) {
-        resetGame();
+        endGame();
+        return;
     }
 
     // Check collision with self
     if (snake.some(part => part.x === newHead.x && part.y === newHead.y)) {
-        resetGame();
+        endGame();
+        return;
     }
 
     snake.unshift(newHead);
@@ -62,15 +62,19 @@ function drawGame() {
     setTimeout(drawGame, 1000 / (score + 10));
 }
 
+function endGame() {
+    gameOver = true;
+    playAgainButton.classList.remove('hidden');
+}
+
 function resetGame() {
     snake = [{ x: 10, y: 10 }];
     velocity = { x: 0, y: 0 };
+    food = { x: 15, y: 15 };
     score = 0;
-    gameOver = true;
-    setTimeout(() => {
-        gameOver = false;
-        drawGame();
-    }, 1000);  // Задержка в 1 секунду перед перезапуском
+    gameOver = false;
+    playAgainButton.classList.add('hidden');
+    drawGame();
 }
 
 document.addEventListener('keydown', event => {
@@ -97,5 +101,7 @@ document.addEventListener('keydown', event => {
             break;
     }
 });
+
+playAgainButton.addEventListener('click', resetGame);
 
 drawGame();
