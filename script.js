@@ -1,14 +1,13 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const playAgainButton = document.getElementById('playAgainButton');
-const scoreDisplay = document.getElementById('scoreDisplay');
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
 
 let snake = [{ x: 10, y: 10 }];
 let velocity = { x: 0, y: 0 };
-let food = { x: 15, y: 15 }];
+let food = { x: 15, y: 15 };
 let score = 0;
 let gameOver = false;
 
@@ -66,18 +65,15 @@ function drawGame() {
 function endGame() {
     gameOver = true;
     playAgainButton.classList.remove('hidden');
-    scoreDisplay.classList.remove('hidden');
-    scoreDisplay.textContent = `Your score: ${score}`;
 }
 
 function resetGame() {
     snake = [{ x: 10, y: 10 }];
     velocity = { x: 0, y: 0 };
-    food = { x: 15, y: 15 }];
+    food = { x: 15, y: 15 };
     score = 0;
     gameOver = false;
     playAgainButton.classList.add('hidden');
-    scoreDisplay.classList.add('hidden');
     drawGame();
 }
 
