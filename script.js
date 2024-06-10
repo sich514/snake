@@ -1,107 +1,93 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const playAgainButton = document.getElementById('playAgainButton');
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-const gridSize = 20;
-const tileCount = canvas.width / gridSize;
+const snakeBlockSize = 20;
+let snake = [{ x: 200, y: 200 }];
+let direction = "right";
+let food = { x: 300, y: 300 };
 
-let snake = [{ x: 10, y: 10 }];
-let velocity = { x: 0, y: 0 };
-let food = { x: 15, y: 15 };
-let score = 0;
-let gameOver = false;
+document.addEventListener("keydown", changeDirection);
 
-function drawTile(color, x, y) {
-    ctx.fillStyle = color;
-    ctx.fillRect(x * gridSize, y * gridSize, gridSize - 2, gridSize - 2);
+function changeDirection(event) {
+    const key = event.keyCode;
+    if (key === 37 && direction !== "right") {
+        direction = "left";
+    } else if (key === 38 && direction !== "down") {
+        direction = "up";
+    } else if (key === 39 && direction !== "left") {
+        direction = "right";
+    } else if (key === 40 && direction !== "up") {
+        direction = "down";
+    }
 }
 
-function drawGame() {
-    if (gameOver) {
-        return;
+function drawBlock(x, y, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, snakeBlockSize, snakeBlockSize);
+}
+
+function drawSnake() {
+    snake.forEach(block => drawBlock(block.x, block.y, "green"));
+}
+
+function moveSnake() {
+    const head = { ...snake[0] };
+    if (direction === "left") head.x -= snakeBlockSize;
+    if (direction === "up") head.y -= snakeBlockSize;
+    if (direction === "right") head.x += snakeBlockSize;
+    if (direction === "down") head.y += snakeBlockSize;
+
+    // Wrap around logic
+    if (head.x < 0) {
+        head.x = canvas.width - snakeBlockSize;
+    } else if (head.x >= canvas.width) {
+        head.x = 0;
+    }
+    if (head.y < 0) {
+        head.y = canvas.height - snakeBlockSize;
+    } else if (head.y >= canvas.height) {
+        head.y = 0;
     }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    snake.unshift(head);
 
-    // Draw food
-    drawTile('#000000', food.x, food.y);
-
-    // Draw snake
-    snake.forEach(part => drawTile('#000000', part.x, part.y));
-
-    // Move snake
-    const newHead = {
-        x: snake[0].x + velocity.x,
-        y: snake[0].y + velocity.y
-    };
-
-    if (newHead.x === food.x && newHead.y === food.y) {
-        food = {
-            x: Math.floor(Math.random() * tileCount),
-            y: Math.floor(Math.random() * tileCount)
-        };
-        score++;
+    // Check if snake has eaten the food
+    if (head.x === food.x && head.y === food.y) {
+        createFood();
     } else {
         snake.pop();
     }
-
-    // Check collision with walls
-    if (newHead.x < 0 || newHead.y < 0 || newHead.x >= tileCount || newHead.y >= tileCount) {
-        endGame();
-        return;
-    }
-
-    // Check collision with self
-    if (snake.some(part => part.x === newHead.x && part.y === newHead.y)) {
-        endGame();
-        return;
-    }
-
-    snake.unshift(newHead);
-
-    setTimeout(drawGame, 1000 / (score + 10));
 }
 
-function endGame() {
-    gameOver = true;
-    playAgainButton.classList.remove('hidden');
+function createFood() {
+    food = {
+        x: Math.floor(Math.random() * (canvas.width / snakeBlockSize)) * snakeBlockSize,
+        y: Math.floor(Math.random() * (canvas.height / snakeBlockSize)) * snakeBlockSize
+    };
 }
 
-function resetGame() {
-    snake = [{ x: 10, y: 10 }];
-    velocity = { x: 0, y: 0 };
-    food = { x: 15, y: 15 };
-    score = 0;
-    gameOver = false;
-    playAgainButton.classList.add('hidden');
-    drawGame();
+function drawFood() {
+    drawBlock(food.x, food.y, "red");
 }
 
-document.addEventListener('keydown', event => {
-    switch (event.key) {
-        case 'ArrowUp':
-            if (velocity.y === 0) {
-                velocity = { x: 0, y: -1 };
-            }
-            break;
-        case 'ArrowDown':
-            if (velocity.y === 0) {
-                velocity = { x: 0, y: 1 };
-            }
-            break;
-        case 'ArrowLeft':
-            if (velocity.x === 0) {
-                velocity = { x: -1, y: 0 };
-            }
-            break;
-        case 'ArrowRight':
-            if (velocity.x === 0) {
-                velocity = { x: 1, y: 0 };
-            }
-            break;
+function main() {
+    if (gameOver()) return;
+
+    setTimeout(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawFood();
+        moveSnake();
+        drawSnake();
+        main();
+    }, 100);
+}
+
+function gameOver() {
+    for (let i = 4; i < snake.length; i++) {
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
     }
-});
+    return false;
+}
 
-playAgainButton.addEventListener('click', resetGame);
-
-drawGame();
+createFood();
+main();
