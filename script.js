@@ -99,8 +99,9 @@ function showPlayAgainButton() {
     const playAgainButton = document.createElement("button");
     playAgainButton.textContent = "Play Again";
     playAgainButton.style.position = "absolute";
-    playAgainButton.style.top = `${canvas.offsetTop + canvas.height / 2}px`;
-    playAgainButton.style.left = `${canvas.offsetLeft + canvas.width / 2 - 50}px`;
+    playAgainButton.style.top = "50%";
+    playAgainButton.style.left = "50%";
+    playAgainButton.style.transform = "translate(-50%, -50%)";
     playAgainButton.style.padding = "10px 20px";
     document.body.appendChild(playAgainButton);
 
