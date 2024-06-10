@@ -5,6 +5,7 @@ const snakeBlockSize = 20;
 let snake = [{ x: 200, y: 200 }];
 let direction = "right";
 let food = { x: 300, y: 300 };
+let gameRunning = true;
 
 document.addEventListener("keydown", changeDirection);
 
@@ -27,7 +28,7 @@ function drawBlock(x, y, color) {
 }
 
 function drawSnake() {
-    snake.forEach(block => drawBlock(block.x, block.y, "green"));
+    snake.forEach(block => drawBlock(block.x, block.y, "black"));
 }
 
 function moveSnake() {
@@ -35,7 +36,7 @@ function moveSnake() {
     if (direction === "left") head.x -= snakeBlockSize;
     if (direction === "up") head.y -= snakeBlockSize;
     if (direction === "right") head.x += snakeBlockSize;
-    if (direction === "down") head.y += snakeBlockSize;
+    if (direction === "down") head.y -= snakeBlockSize;
 
     // Wrap around logic
     if (head.x < 0) {
@@ -67,17 +68,21 @@ function createFood() {
 }
 
 function drawFood() {
-    drawBlock(food.x, food.y, "red");
+    drawBlock(food.x, food.y, "black");
 }
 
 function main() {
-    if (gameOver()) return;
+    if (!gameRunning) return;
 
     setTimeout(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawFood();
         moveSnake();
         drawSnake();
+        if (gameOver()) {
+            showPlayAgainButton();
+            return;
+        }
         main();
     }, 100);
 }
@@ -87,6 +92,30 @@ function gameOver() {
         if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
     }
     return false;
+}
+
+function showPlayAgainButton() {
+    gameRunning = false;
+    const playAgainButton = document.createElement("button");
+    playAgainButton.textContent = "Play Again";
+    playAgainButton.style.position = "absolute";
+    playAgainButton.style.top = `${canvas.offsetTop + canvas.height / 2}px`;
+    playAgainButton.style.left = `${canvas.offsetLeft + canvas.width / 2 - 50}px`;
+    playAgainButton.style.padding = "10px 20px";
+    document.body.appendChild(playAgainButton);
+
+    playAgainButton.addEventListener("click", () => {
+        document.body.removeChild(playAgainButton);
+        resetGame();
+        main();
+    });
+}
+
+function resetGame() {
+    snake = [{ x: 200, y: 200 }];
+    direction = "right";
+    createFood();
+    gameRunning = true;
 }
 
 createFood();
