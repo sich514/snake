@@ -106,6 +106,7 @@ function showPlayAgainButton() {
     playAgainButton.style.left = "50%";
     playAgainButton.style.transform = "translate(-50%, -50%)";
     playAgainButton.style.padding = "10px 20px";
+    playAgainButton.style.color = "#000";
     document.body.appendChild(playAgainButton);
 
     playAgainButton.addEventListener("click", () => {
@@ -134,6 +135,7 @@ function updateScore() {
         newScoreDisplay.style.left = `${canvas.offsetLeft}px`;
         newScoreDisplay.style.fontSize = "20px";
         newScoreDisplay.style.fontWeight = "bold";
+        newScoreDisplay.style.color = "#5d744b";
         newScoreDisplay.textContent = `Score: ${score}`;
         document.body.appendChild(newScoreDisplay);
     } else {
