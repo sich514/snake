@@ -3,62 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake Game</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .roadmap {
-            margin-top: 20px;
-            color: #993ec1;
-        }
-
-        .roadmap h2 {
-            color: #993ec1;
-        }
-
-        .roadmap ol {
-            list-style-type: decimal;
-        }
-
-        .roadmap ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-    </style>
+    <title>Snake Game - Nokia 3310 Style</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <div class="game-area">
-            <canvas id="gameCanvas"></canvas>
-        </div>
-        <div class="score-area">
-            <span id="score">Score: 0</span>
-        </div>
-        <div class="controls">
-            <button id="startButton">Start Game</button>
-        </div>
+    <h1 class="title">Play Snake - Pump $SNAKE</h1>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div class="links">
+        <a href="https://t.me/snake_solana" target="_blank">TG</a>
+        <a href="https://x.com/snakesolgame" target="_blank">X</a>
+        <a href="https://pump.fun" target="_blank">BUY(soon)</a>
     </div>
-
-    <!-- Новый раздел Roadmap -->
-    <div class="roadmap">
-        <h2>Roadmap</h2>
-        <ol>
-            <li>Launch snake web game</li>
-            <li>Launch competition point system + referral system</li>
-            <li>Launch $SNAKE on pump.fun (6% initial supply for team for maintenance and initial marketing)</li>
-            <li>Launch on Raydium</li>
-            <li>Airdrop</li>
-            <li>Launch battle model of snake game (with utility for $SNAKE token), from all income:
-                <ul>
-                    <li>45% - burning</li>
-                    <li>40% - marketing</li>
-                    <li>10% - team rewards</li>
-                    <li>5% - future airdrops</li>
-                </ul>
-            </li>
-            <li>Send it high</li>
-        </ol>
-    </div>
-
+    <button id="playAgainButton" class="hidden">Play Again</button>
     <script src="script.js"></script>
 </body>
 </html>
