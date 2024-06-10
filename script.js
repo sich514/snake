@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const snakeBlockSize = 20;
 let snake = [{ x: 200, y: 200 }];
 let direction = "right";
-let food = { x: 300, y: 300 };
+let food = { x: 300, y: 300 }];
 let gameRunning = true;
 let score = 0;
 
@@ -130,7 +130,7 @@ function updateScore() {
         const newScoreDisplay = document.createElement("div");
         newScoreDisplay.id = "scoreDisplay";
         newScoreDisplay.style.position = "absolute";
-        newScoreDisplay.style.top = `${canvas.offsetTop - 30}px`;
+        newScoreDisplay.style.top = `${canvas.offsetTop + canvas.height + 10}px`;
         newScoreDisplay.style.left = `${canvas.offsetLeft}px`;
         newScoreDisplay.style.fontSize = "20px";
         newScoreDisplay.style.fontWeight = "bold";
