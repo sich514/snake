@@ -6,6 +6,7 @@ let snake = [{ x: 200, y: 200 }];
 let direction = "right";
 let food = { x: 300, y: 300 };
 let gameRunning = true;
+let score = 0;
 
 document.addEventListener("keydown", changeDirection);
 
@@ -55,6 +56,8 @@ function moveSnake() {
     // Check if snake has eaten the food
     if (head.x === food.x && head.y === food.y) {
         createFood();
+        score++;
+        updateScore();
     } else {
         snake.pop();
     }
@@ -115,8 +118,27 @@ function showPlayAgainButton() {
 function resetGame() {
     snake = [{ x: 200, y: 200 }];
     direction = "right";
+    score = 0;
+    updateScore();
     createFood();
     gameRunning = true;
+}
+
+function updateScore() {
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    if (!scoreDisplay) {
+        const newScoreDisplay = document.createElement("div");
+        newScoreDisplay.id = "scoreDisplay";
+        newScoreDisplay.style.position = "absolute";
+        newScoreDisplay.style.top = `${canvas.offsetTop - 30}px`;
+        newScoreDisplay.style.left = `${canvas.offsetLeft}px`;
+        newScoreDisplay.style.fontSize = "20px";
+        newScoreDisplay.style.fontWeight = "bold";
+        newScoreDisplay.textContent = `Score: ${score}`;
+        document.body.appendChild(newScoreDisplay);
+    } else {
+        scoreDisplay.textContent = `Score: ${score}`;
+    }
 }
 
 createFood();
