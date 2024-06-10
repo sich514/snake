@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const snakeBlockSize = 20;
 let snake = [{ x: 200, y: 200 }];
 let direction = "right";
-let food = { x: 300, y: 300 }];
+let food = { x: 300, y: 300 };
 let gameRunning = true;
 let score = 0;
 
@@ -142,4 +142,5 @@ function updateScore() {
 }
 
 createFood();
+updateScore();  // Initialize score display
 main();
