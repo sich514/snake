@@ -36,7 +36,7 @@ function moveSnake() {
     if (direction === "left") head.x -= snakeBlockSize;
     if (direction === "up") head.y -= snakeBlockSize;
     if (direction === "right") head.x += snakeBlockSize;
-    if (direction === "down") head.y -= snakeBlockSize;
+    if (direction === "down") head.y += snakeBlockSize;
 
     // Wrap around logic
     if (head.x < 0) {
